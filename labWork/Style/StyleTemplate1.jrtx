@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jasperTemplate PUBLIC "-//JasperReports//DTD Template//EN" "http://jasperreports.sourceforge.net/dtds/jaspertemplate.dtd">
+
+<jasperTemplate>
+	<style name="New style" mode="Opaque" backcolor="#FFCCCC" fill="Solid" radius="0" scaleImage="RetainShape" hAlign="Center" pattern="" fontSize="20">
+		<pen lineStyle="Solid" lineColor="#FF0000"/>
+	</style>
+</jasperTemplate>

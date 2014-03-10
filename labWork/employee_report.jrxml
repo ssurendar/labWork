@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="employee_report" language="groovy" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="2970158c-0fdd-41f3-921f-0322da65c223">
+	<property name="ireport.zoom" value="1.3310000000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA["D:\\TL\\Jaspersoft\\labWork\\TrainingStyle.jrtx"]]></template>
+	<style name="table">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==1]]></conditionExpression>
+			<style backcolor="#CCCCCC"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{employee_salary} > 35000]]></conditionExpression>
+			<style forecolor="#009900"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="department_ID" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     employee."full_name" AS employee_full_name,
+     employee."hire_date" AS employee_hire_date,
+     employee."salary" AS employee_salary,
+     employee."gender" AS employee_gender
+FROM
+     "public"."employee" employee
+WHERE employee.department_id=$P{department_ID}]]>
+	</queryString>
+	<field name="employee_full_name" class="java.lang.String"/>
+	<field name="employee_hire_date" class="java.sql.Timestamp"/>
+	<field name="employee_salary" class="java.math.BigDecimal"/>
+	<field name="employee_gender" class="java.lang.String"/>
+	<variable name="maleCount" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{employee_gender}=="M"?1:0]]></variableExpression>
+	</variable>
+	<variable name="femaleCount" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{employee_gender}=="F"?1:0]]></variableExpression>
+	</variable>
+	<variable name="totalSalary" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{employee_salary}]]></variableExpression>
+	</variable>
+	<variable name="totalEmployees" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{employee_full_name}]]></variableExpression>
+	</variable>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement style="header" x="14" y="2" width="100" height="20" forecolor="#CC0099" uuid="02d19e1e-d102-41fd-829f-866b9964731d"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Dashed"/>
+					<topPen lineWidth="1.0" lineStyle="Dashed"/>
+					<leftPen lineWidth="1.0" lineStyle="Dashed"/>
+					<bottomPen lineWidth="1.0" lineStyle="Dashed"/>
+					<rightPen lineWidth="1.0" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Employee Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="header" x="138" y="2" width="100" height="20" forecolor="#CC0099" uuid="27ed926d-0c81-4175-adfd-20142138d2d0"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Dashed"/>
+					<topPen lineWidth="1.0" lineStyle="Dashed"/>
+					<leftPen lineWidth="1.0" lineStyle="Dashed"/>
+					<bottomPen lineWidth="1.0" lineStyle="Dashed"/>
+					<rightPen lineWidth="1.0" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Hire Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="header" x="273" y="2" width="100" height="20" forecolor="#CC0099" uuid="d2400e2c-1d69-4e06-a076-cd2c228a51ec"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Dashed"/>
+					<topPen lineWidth="1.0" lineStyle="Dashed"/>
+					<leftPen lineWidth="1.0" lineStyle="Dashed"/>
+					<bottomPen lineWidth="1.0" lineStyle="Dashed"/>
+					<rightPen lineWidth="1.0" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Salary]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="header" x="421" y="2" width="100" height="20" forecolor="#CC0099" uuid="acf74a19-4f9e-4562-acef-d55c2d2fa08f"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Dashed"/>
+					<topPen lineWidth="1.0" lineStyle="Dashed"/>
+					<leftPen lineWidth="1.0" lineStyle="Dashed"/>
+					<bottomPen lineWidth="1.0" lineStyle="Dashed"/>
+					<rightPen lineWidth="1.0" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Gender]]></text>
+			</staticText>
+			<line>
+				<reportElement x="21" y="26" width="500" height="1" uuid="2d900eb8-0271-4dd6-9f19-173d2534c33e"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<frame>
+				<reportElement style="table" mode="Opaque" x="14" y="0" width="555" height="30" uuid="7c21b117-fdca-44e7-849e-d96fa9b2578e"/>
+				<textField>
+					<reportElement x="14" y="9" width="113" height="20" uuid="339686d0-3e31-4f2f-9050-46772eac5db2"/>
+					<textFieldExpression><![CDATA[$F{employee_full_name}]]></textFieldExpression>
+				</textField>
+				<textField pattern="MMMMM dd, yyyy">
+					<reportElement x="138" y="9" width="110" height="20" uuid="3b7e3495-69a2-4179-a0b1-bf645b7eaf3f"/>
+					<textFieldExpression><![CDATA[$F{employee_hire_date}]]></textFieldExpression>
+				</textField>
+				<textField pattern="">
+					<reportElement style="table" x="273" y="9" width="100" height="20" uuid="8b83486b-7f6b-4762-9d31-a71c3b0d72b6"/>
+					<textFieldExpression><![CDATA[$F{employee_salary}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="432" y="9" width="100" height="20" uuid="9164d274-fac4-4662-b752-865b62de9f9d"/>
+					<textFieldExpression><![CDATA[$F{employee_gender}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<summary>
+		<band height="150" splitType="Stretch">
+			<bar3DChart>
+				<chart theme="TrainingChartTheme">
+					<reportElement x="149" y="12" width="200" height="100" uuid="c7721127-10f1-4c90-b650-dbcab058d98e">
+						<printWhenExpression><![CDATA[$V{maleCount} >0 && $V{femaleCount} >0]]></printWhenExpression>
+					</reportElement>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["M"]]></seriesExpression>
+						<categoryExpression><![CDATA["Employees"]]></categoryExpression>
+						<valueExpression><![CDATA[$V{maleCount}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["F"]]></seriesExpression>
+						<categoryExpression><![CDATA["Employees"]]></categoryExpression>
+						<valueExpression><![CDATA[$V{femaleCount}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot orientation="Horizontal"/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</bar3DPlot>
+			</bar3DChart>
+			<textField>
+				<reportElement x="138" y="112" width="305" height="20" forecolor="#CC0033" uuid="55097fa6-8259-4003-bd08-d43e4ceaa301">
+					<printWhenExpression><![CDATA[$V{femaleCount} ==0 || $V{maleCount} ==0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="15" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{femaleCount} >0 && $V{maleCount} ==0 ? "All Females-Department": " "]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

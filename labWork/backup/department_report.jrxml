@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="department_report" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" uuid="cadc9e31-c7a1-4f72-9dd6-e0d813f33fe9">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="Country" uuid="25376c94-3ae2-4586-96a2-78d4cc034e21">
+		<queryString language="SQL">
+			<![CDATA[SELECT
+     store."store_country" AS store_store_country,
+     count(employee."employee_id") AS num_employees
+FROM
+     "public"."employee" employee INNER JOIN "public"."store" store ON employee."employee_id" = store."store_id"
+GROUP BY
+     store_store_country
+ORDER BY
+     store."store_country" ASC]]>
+		</queryString>
+		<field name="store_store_country" class="java.lang.String"/>
+		<field name="num_employees" class="java.lang.Long"/>
+		<group name="store_store_country">
+			<groupExpression><![CDATA[$F{store_store_country}]]></groupExpression>
+		</group>
+	</subDataset>
+	<queryString>
+		<![CDATA[SELECT
+     department."department_id" AS department_id,
+     department."department_description" AS department_department_description
+FROM
+     "public"."department" department]]>
+	</queryString>
+	<field name="department_id" class="java.lang.Integer"/>
+	<field name="department_department_description" class="java.lang.String"/>
+	<background>
+		<band height="802" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="802" backcolor="#CCFFCC" uuid="4b1e521e-61ed-416c-9908-fb525ba510d9"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<image>
+				<reportElement x="200" y="727" width="112" height="47" uuid="b7d95892-fe1e-4559-be1b-297e54df17fc"/>
+				<imageExpression><![CDATA["C:\\Users\\surendars\\Downloads\\softcrylic_logo.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="50" splitType="Stretch">
+			<textField>
+				<reportElement x="127" y="11" width="349" height="26" uuid="42a4c869-1a27-4152-9eb0-4416a5637da5"/>
+				<textElement textAlignment="Center">
+					<font size="20"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Department Summary"]]></textFieldExpression>
+			</textField>
+			<image onErrorType="Icon">
+				<reportElement x="45" y="11" width="68" height="39" uuid="fa9765d8-8a4f-4b17-ad90-79f7e2dfc454"/>
+				<imageExpression><![CDATA["http://localhost:8080/tomcat.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="42" y="0" width="459" height="61" forecolor="#FFFFFF" backcolor="#CCFFFF" uuid="34ad9bdf-aed5-43b3-8a7b-0022ce920bb9"/>
+				<staticText>
+					<reportElement x="170" y="3" width="100" height="20" uuid="8fffa040-00ca-449d-8000-33ef96f3b3a5"/>
+					<text><![CDATA[Employee Count]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="23" y="3" width="100" height="20" uuid="0359e64c-5df4-4a4e-8fb6-108b6ceb333c"/>
+					<text><![CDATA[Department]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="305" y="3" width="100" height="20" uuid="c780675a-ae0c-4ab4-a37b-cdfa17d0787c"/>
+					<text><![CDATA[Total Salary]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="100" splitType="Stretch">
+			<textField>
+				<reportElement x="212" y="10" width="100" height="20" uuid="4b066925-8fa7-4b24-bc2a-13f649b389f2"/>
+				<textFieldExpression><![CDATA[$F{department_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="45" y="10" width="100" height="20" uuid="150a5692-28f2-4c3f-b534-43dde6b1482a"/>
+				<textFieldExpression><![CDATA[$F{department_department_description}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="12" y="55" width="200" height="1" uuid="0166aff0-d0e9-4095-ac4b-72ed35e28ec8"/>
+				<subreportParameter name="department_ID">
+					<subreportParameterExpression><![CDATA[$F{department_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["D:\\TL\\Jaspersoft\\labWork\\employee_report.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="170" splitType="Stretch">
+			<pieChart>
+				<chart>
+					<reportElement x="113" y="17" width="334" height="135" uuid="f398df9a-c164-4ed8-ae1a-38b363535b5d"/>
+					<chartTitle>
+						<font size="12" isBold="true"/>
+						<titleExpression><![CDATA["Employees"]]></titleExpression>
+					</chartTitle>
+					<chartSubtitle>
+						<font isBold="true"/>
+						<subtitleExpression><![CDATA["Per Country"]]></subtitleExpression>
+					</chartSubtitle>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<dataset>
+						<datasetRun subDataset="Country" uuid="9faab2a1-974d-4cb8-9d5b-6b44a986086f"/>
+					</dataset>
+					<keyExpression><![CDATA[$F{store_store_country}]]></keyExpression>
+					<valueExpression><![CDATA[$F{num_employees}]]></valueExpression>
+				</pieDataset>
+				<piePlot labelFormat="{0}:{1}">
+					<plot>
+						<seriesColor seriesOrder="0" color="#CCCC00"/>
+						<seriesColor seriesOrder="1" color="#CC66FF"/>
+						<seriesColor seriesOrder="2" color="#6699FF"/>
+						<seriesColor seriesOrder="3" color="#794216"/>
+						<seriesColor seriesOrder="4" color="#8C4FAA"/>
+						<seriesColor seriesOrder="5" color="#CCCCCC"/>
+					</plot>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+		</band>
+	</summary>
+	<noData>
+		<band height="50">
+			<staticText>
+				<reportElement x="140" y="11" width="292" height="20" uuid="9277229c-9ca2-404f-9bb7-36b9d7664bbc"/>
+				<text><![CDATA[	The report Returned No Records]]></text>
+			</staticText>
+		</band>
+	</noData>
+</jasperReport>

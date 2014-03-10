@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jasperTemplate PUBLIC "-//JasperReports//DTD Template//EN" "http://jasperreports.sourceforge.net/dtds/jaspertemplate.dtd">
+
+<jasperTemplate>
+	<style name="base" isDefault="true" forecolor="#003DF0" fontName="Arial" fontSize="12"/>
+	<style name="header" forecolor="#FF532E" fontSize="12"/>
+	<style name="title" forecolor="#FF405B" fontName="Arial Black" fontSize="14"/>
+	<style name="subtitle" forecolor="#FF5B18" fontName="Arial" fontSize="12"/>
+</jasperTemplate>
