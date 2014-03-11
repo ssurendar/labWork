@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NorthAmericaMap" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4793c5a3-a337-4d00-b8e5-e705ed46c030">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     sum(sales_fact_1998."store_sales") AS totalsales,
+     store."store_country" AS store_store_country
+FROM
+     "public"."sales_fact_1998" sales_fact_1998 INNER JOIN "public"."store" store ON sales_fact_1998."product_id" = store."store_id"
+GROUP BY
+     store_store_country
+ORDER BY
+     store."store_country" ASC]]>
+	</queryString>
+	<field name="totalsales" class="java.math.BigDecimal"/>
+	<field name="store_store_country" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="141" y="5" width="196" height="20" uuid="fe4c5686-a433-40d2-b1e5-ec43af7e18aa"/>
+				<textElement textAlignment="Center">
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[Sales By Country]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="124" y="0" width="100" height="20" uuid="778fbc22-b6ec-43af-8f14-d1c583fdd04f"/>
+				<text><![CDATA[store_store_country]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="346" y="0" width="100" height="20" uuid="38134433-80be-4a1c-bcb0-64b880e68b27"/>
+				<text><![CDATA[totalsales]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="124" y="0" width="100" height="20" uuid="af4b4ced-0693-43f4-9d6b-1e7dc77b6804"/>
+				<textFieldExpression><![CDATA[$F{store_store_country}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0">
+				<reportElement x="346" y="0" width="100" height="20" uuid="4bee5e95-264b-4a03-b040-36d7eaf0d4d2"/>
+				<textFieldExpression><![CDATA[$F{totalsales}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="500" splitType="Stretch">
+			<componentElement>
+				<reportElement x="82" y="16" width="400" height="450" uuid="48cc2dc8-3d5c-4a38-a022-9a4be21dfadd"/>
+				<mp:map xmlns:mp="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<mp:latitudeExpression><![CDATA[37.7750f]]></mp:latitudeExpression>
+					<mp:longitudeExpression><![CDATA[-122.4183f]]></mp:longitudeExpression>
+				</mp:map>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>

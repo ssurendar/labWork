@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ProductCategory" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f1cc7ef7-0554-4032-b9da-cea3bd07778c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     product_class."product_category" AS product_class_product_category,
+     product_class."product_family" AS product_class_product_family,
+     count(product."product_id") AS Product_count
+FROM
+     "public"."product_class" product_class INNER JOIN "public"."product" product ON product_class."product_class_id" = product."product_class_id"
+GROUP BY
+     product_class_product_category,
+     product_class_product_family
+ORDER BY
+     product_class."product_category" ASC,
+     product_class."product_family" ASC]]>
+	</queryString>
+	<field name="product_class_product_category" class="java.lang.String"/>
+	<field name="product_class_product_family" class="java.lang.String"/>
+	<field name="product_count" class="java.lang.Long"/>
+	<title>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="25" uuid="4572887b-b16d-4346-9d54-5e99e3e42ea7"/>
+				<textElement textAlignment="Center">
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[Product By Category]]></text>
+			</staticText>
+		</band>
+	</title>
+	<summary>
+		<band height="500" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -25,16 +25,12 @@ ORDER BY
 		</group>
 	</subDataset>
 	<scriptlet name="departmentScriptlet" class="com.jaspersoft.training.ireport.TrainingScriptlet"/>
-	<parameter name="department" class="java.lang.String">
-		<defaultValueExpression><![CDATA["HQ Marketing" ]]></defaultValueExpression>
-	</parameter>
 	<queryString>
 		<![CDATA[SELECT
      department."department_id" AS department_id,
      department."department_description" AS department_department_description
 FROM
-     "public"."department" department
-WHERE department.department_description =$P{department}]]>
+     "public"."department" department]]>
 	</queryString>
 	<field name="department_id" class="java.lang.Integer"/>
 	<field name="department_department_description" class="java.lang.String"/>
@@ -78,11 +74,11 @@ WHERE department.department_description =$P{department}]]>
 	<title>
 		<band height="130" splitType="Stretch">
 			<textField>
-				<reportElement style="subtitle" x="127" y="11" width="347" height="26" uuid="42a4c869-1a27-4152-9eb0-4416a5637da5"/>
+				<reportElement style="subtitle" x="127" y="11" width="349" height="26" uuid="42a4c869-1a27-4152-9eb0-4416a5637da5"/>
 				<textElement textAlignment="Center">
 					<font size="20"/>
 				</textElement>
-				<textFieldExpression><![CDATA[msg( $R{title}, $P{department} )]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$R{title}]]></textFieldExpression>
 			</textField>
 			<image onErrorType="Icon">
 				<reportElement x="45" y="11" width="68" height="39" uuid="fa9765d8-8a4f-4b17-ad90-79f7e2dfc454"/>

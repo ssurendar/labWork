@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CostSummary" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9159bc7e-db0a-41ea-ad6a-35c7288cf7cb">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Crosstab Data Text" hAlign="Center"/>
+	<queryString>
+		<![CDATA[SELECT
+     store."store_city" AS store_store_city,
+     store."store_country" AS store_store_country,
+     sales_fact_1998."store_cost" AS sales_fact_1998_store_cost,
+     time_by_day."the_date" AS time_by_day_the_date,
+     time_by_day."the_year" AS time_by_day_the_year
+FROM
+     "public"."sales_fact_1998" sales_fact_1998 INNER JOIN "public"."store" store ON sales_fact_1998."product_id" = store."store_id"
+     INNER JOIN "public"."time_by_day" time_by_day ON sales_fact_1998."time_id" = time_by_day."time_id"]]>
+	</queryString>
+	<field name="store_store_city" class="java.lang.String"/>
+	<field name="store_store_country" class="java.lang.String"/>
+	<field name="sales_fact_1998_store_cost" class="java.math.BigDecimal"/>
+	<field name="time_by_day_the_date" class="java.sql.Timestamp"/>
+	<field name="time_by_day_the_year" class="java.lang.Integer"/>
+	<summary>
+		<band height="550" splitType="Stretch">
+			<crosstab>
+				<reportElement x="0" y="0" width="555" height="550" uuid="96bdf333-2ce2-4526-8f69-75fde80f9e4e"/>
+				<rowGroup name="store_store_country" width="70" totalPosition="End">
+					<bucket class="java.lang.String">
+						<bucketExpression><![CDATA[$F{store_store_country}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents backcolor="#FAEBD7" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="70" height="25" uuid="c9278895-e33a-4fb6-84cc-f40c84248899"/>
+								<textFieldExpression><![CDATA[$V{store_store_country}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents backcolor="#AF6400" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="140" height="25" forecolor="#FFFFFF" uuid="d6304da4-02a4-4ec9-b6cf-eb97deef059f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Total store_store_country]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<rowGroup name="store_store_city" width="70" totalPosition="End">
+					<bucket class="java.lang.String">
+						<bucketExpression><![CDATA[$F{store_store_city}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents backcolor="#FAEBD7" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="70" height="25" uuid="f08aef7e-67b7-444b-8c5c-ecdf2cd21b49"/>
+								<textFieldExpression><![CDATA[$V{store_store_city}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents backcolor="#FFE4BF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="70" height="25" uuid="8c017a6d-3d69-4a6d-bd63-456570f5d7dc"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Total store_store_city]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="time_by_day_the_date" height="30" totalPosition="End">
+					<bucket class="java.lang.String">
+						<bucketExpression><![CDATA[(new SimpleDateFormat("yyyy")).format($F{time_by_day_the_date})]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents backcolor="#FAEBD7" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="30" uuid="b1c80ed1-effe-4ead-9d3e-278b8d6cbeea"/>
+								<textFieldExpression><![CDATA[$V{time_by_day_the_date}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents backcolor="#FFE4BF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="30" uuid="f80fafd0-dce7-489e-8ad0-24473681cb50"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Total time_by_day_the_date]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="sales_fact_1998_store_costMeasure" class="java.math.BigDecimal" calculation="Sum">
+					<measureExpression><![CDATA[$F{sales_fact_1998_store_cost}]]></measureExpression>
+				</measure>
+				<crosstabCell width="50" height="25">
+					<cellContents>
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField pattern="¤ #,##0">
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25" uuid="6f7fc554-d7a4-45c7-b15a-ac69c0a3ba81"/>
+							<textFieldExpression><![CDATA[$V{sales_fact_1998_store_costMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell height="25" rowTotalGroup="store_store_country">
+					<cellContents backcolor="#AF6400" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField pattern="¤ #,##0">
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25" forecolor="#FFFFFF" uuid="b5863804-3403-4dcb-8774-03949cba9779"/>
+							<textFieldExpression><![CDATA[$V{sales_fact_1998_store_costMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="50" height="25" columnTotalGroup="time_by_day_the_date">
+					<cellContents backcolor="#FFE4BF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField pattern="¤ #,##0">
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25" uuid="655e5526-edcb-4583-9150-edfb5c668d13"/>
+							<textFieldExpression><![CDATA[$V{sales_fact_1998_store_costMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="store_store_country" columnTotalGroup="time_by_day_the_date">
+					<cellContents backcolor="#AF6400" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField pattern="¤ #,##0">
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25" forecolor="#FFFFFF" uuid="6c233cc5-069e-42f7-9c04-36e72e61d8e8"/>
+							<textFieldExpression><![CDATA[$V{sales_fact_1998_store_costMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell height="25" rowTotalGroup="store_store_city">
+					<cellContents backcolor="#FFE4BF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField pattern="¤ #,##0">
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25" uuid="7a6099ec-65e4-40f5-a228-c8251afac0bf"/>
+							<textFieldExpression><![CDATA[$V{sales_fact_1998_store_costMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="store_store_city" columnTotalGroup="time_by_day_the_date">
+					<cellContents backcolor="#FFE4BF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField pattern="¤ #,##0">
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25" uuid="71132a2d-eb6b-440f-bca8-0eefb9a304c6"/>
+							<textFieldExpression><![CDATA[$V{sales_fact_1998_store_costMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+			</crosstab>
+		</band>
+	</summary>
+</jasperReport>
