@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Salary_Info" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3e47dbad-67e2-4967-bb89-230be2be795c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.layers" value="##Tue Mar 18 15:09:01 IST 2014\nlayer.0.name=Background\nlayer.0.visible=true\nlayer.0.id=0"/>
+	<style name="High_salary" forecolor="#000000">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{salary_salary_paid} >30]]></conditionExpression>
+			<style forecolor="#009900"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==1]]></conditionExpression>
+			<style mode="Opaque" backcolor="#CCCCFF"/>
+		</conditionalStyle>
+	</style>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="dataset1" uuid="c71c630d-721d-4e01-b303-68674f54c642"/>
+	<parameter name="dept_Id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[3]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     salary."employee_id" AS salary_employee_id,
+     salary."salary_paid" AS salary_salary_paid,
+     salary."pay_date" AS salary_pay_date
+FROM
+     "public"."salary" salary
+WHERE salary.department_id=$P{dept_Id}]]>
+	</queryString>
+	<field name="salary_employee_id" class="java.lang.Integer"/>
+	<field name="salary_salary_paid" class="java.math.BigDecimal"/>
+	<field name="salary_pay_date" class="java.sql.Timestamp"/>
+	<variable name="result_Sum" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{salary_salary_paid}]]></variableExpression>
+	</variable>
+	<variable name="current_Sum" class="java.math.BigDecimal" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{salary_salary_paid}]]></variableExpression>
+	</variable>
+	<variable name="balance_Diff" class="java.math.BigDecimal" resetType="Page">
+		<variableExpression><![CDATA[$V{result_Sum}-$V{current_Sum}]]></variableExpression>
+	</variable>
+	<background>
+		<band height="802">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="802" backcolor="#FFE5F8" uuid="5cc65daa-ece0-4f7f-87e5-266c1927f079"/>
+			</frame>
+		</band>
+	</background>
+	<title>
+		<band height="40" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="40" forecolor="#990000" uuid="795a8a24-c672-4244-b8b2-34bd4ac00203"/>
+				<textElement textAlignment="Center">
+					<font size="20"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Salary Info Report"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="23" y="2" width="100" height="20" uuid="b9f139a1-638d-447a-84c1-3add88c415ee"/>
+				<text><![CDATA[Employee ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="186" y="2" width="100" height="20" uuid="fb6db079-401f-470e-9da6-3a3447d719e6"/>
+				<text><![CDATA[Salary Paid]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="2" width="100" height="20" uuid="62714ec2-480c-4a9c-a0bb-72eff13cebbb"/>
+				<text><![CDATA[Pay Date]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="22" width="555" height="1" uuid="bd720cc8-3273-4147-bc61-cd02e70815c9"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="40" splitType="Stretch">
+			<textField>
+				<reportElement x="23" y="0" width="100" height="20" uuid="41d83cc3-fae0-4611-9021-c2f42ea1b03e"/>
+				<textFieldExpression><![CDATA[$F{salary_employee_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="High_salary" x="186" y="0" width="100" height="20" uuid="008fd430-73aa-455d-b280-e77c0cf02970"/>
+				<textFieldExpression><![CDATA[$F{salary_salary_paid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="350" y="0" width="100" height="20" uuid="5a61a814-2e38-4eb4-bbb9-431424778c85"/>
+				<textFieldExpression><![CDATA[$F{salary_pay_date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="100">
+			<staticText>
+				<reportElement x="64" y="9" width="100" height="20" forecolor="#3366FF" uuid="fbac2eed-78c0-475a-bf73-e35473d1a174"/>
+				<text><![CDATA[Current Page Total=]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="164" y="9" width="100" height="20" uuid="e9b68ff5-81de-4626-baf8-95928b40b517"/>
+				<textFieldExpression><![CDATA[$V{current_Sum}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="77" y="29" width="59" height="21" forecolor="#006600" uuid="95487b2d-bd5d-461a-a8c3-111f66407946"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[Total   =]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="164" y="29" width="100" height="20" uuid="b5a513ab-50e7-407a-9f5f-6b97e9439d8c"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#336600"/>
+					<topPen lineWidth="1.0" lineColor="#336600"/>
+					<leftPen lineWidth="1.0" lineColor="#336600"/>
+					<bottomPen lineWidth="1.0" lineColor="#336600"/>
+					<rightPen lineWidth="1.0" lineColor="#336600"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{result_Sum}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="60" y="60" width="100" height="20" forecolor="#FF6666" uuid="cb8af7be-ef76-4ad5-970a-078875889039"/>
+				<text><![CDATA[Balance=]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="164" y="60" width="100" height="20" uuid="016d9abb-b8ed-4e60-b936-952424490c9a"/>
+				<textFieldExpression><![CDATA[$V{balance_Diff}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="406" y="10" width="80" height="20" uuid="7bd9d667-e6ee-4472-9956-3c9354ac6cef"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="10" width="40" height="20" uuid="b1991b0c-226c-4be2-9c53-d8d49ca243e9"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="150" splitType="Stretch">
+			<pie3DChart>
+				<chart>
+					<reportElement x="46" y="11" width="421" height="139" uuid="37fe6113-36bf-40a3-8c95-823daf6cb100"/>
+					<chartTitle>
+						<titleExpression><![CDATA["Employee ID"]]></titleExpression>
+					</chartTitle>
+					<chartSubtitle>
+						<subtitleExpression><![CDATA["Salary Paid"]]></subtitleExpression>
+					</chartSubtitle>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<keyExpression><![CDATA[$F{salary_employee_id}]]></keyExpression>
+					<valueExpression><![CDATA[$F{salary_salary_paid}]]></valueExpression>
+				</pieDataset>
+				<pie3DPlot labelFormat="{0}:{1}">
+					<plot>
+						<seriesColor seriesOrder="0" color="#FF9999"/>
+						<seriesColor seriesOrder="1" color="#CC66FF"/>
+						<seriesColor seriesOrder="2" color="#CCCCFF"/>
+						<seriesColor seriesOrder="3" color="#009999"/>
+						<seriesColor seriesOrder="4" color="#CCFFCC"/>
+						<seriesColor seriesOrder="5" color="#CCCCCC"/>
+					</plot>
+					<itemLabel/>
+				</pie3DPlot>
+			</pie3DChart>
+		</band>
+	</summary>
+</jasperReport>

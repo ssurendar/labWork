@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Supplier" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="91f38178-8be4-4d56-b424-6908469b92b0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     suppliers."SupplierID" AS suppliers_SupplierID,
+     suppliers."ContactName" AS suppliers_ContactName,
+     products."ProductName" AS products_ProductName,
+     products."UnitsInStock" AS products_UnitsInStock
+FROM
+     "public"."products" products INNER JOIN "public"."suppliers" suppliers ON products."SupplierID" = suppliers."SupplierID"]]>
+	</queryString>
+	<field name="suppliers_supplierid" class="java.lang.Integer"/>
+	<field name="suppliers_contactname" class="java.lang.String"/>
+	<field name="products_productname" class="java.lang.String"/>
+	<field name="products_unitsinstock" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="40" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="40" forecolor="#A92630" uuid="15c23325-9945-476d-bb48-7bd2814a5b1c"/>
+				<textElement textAlignment="Center">
+					<font size="20"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Main Report(Supplier Report)"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="455" y="0" width="100" height="20" uuid="4fc1534e-048a-4bb0-bc7a-592b01152178"/>
+				<text><![CDATA[Main Report]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="50" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="43" height="37" uuid="a26ba275-3000-470d-a469-38002f608c79"/>
+				<subreportParameter name="prod_Id">
+					<subreportParameterExpression><![CDATA[$F{suppliers_supplierid}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["D:\\TL\\Jaspersoft\\labWork.git\\trunk\\Northwind\\Order_details.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="215" y="24" width="80" height="20" uuid="5828b6be-410d-44d6-91b6-dd0dc48e444e"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="295" y="24" width="40" height="20" uuid="7c29ebea-01a1-4c60-bfe9-11c019cfd25b"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

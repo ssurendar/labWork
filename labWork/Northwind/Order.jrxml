@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Order" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="dea99931-3404-4edc-9f93-4e077cb15832">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="formet1" fill="Solid">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==1]]></conditionExpression>
+			<style forecolor="#FFFFFF" backcolor="#FFCCFF" hAlign="Left"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[SELECT
+     orders."OrderID" AS orders_OrderID,
+     orders."OrderDate" AS orders_OrderDate,
+     orders."ShippedDate" AS orders_ShippedDate,
+     orders."ShipName" AS orders_ShipName,
+     orders."ShipAddress" AS orders_ShipAddress
+FROM
+     "public"."orders" orders]]>
+	</queryString>
+	<field name="orders_orderid" class="java.lang.Integer"/>
+	<field name="orders_orderdate" class="java.sql.Date"/>
+	<field name="orders_shippeddate" class="java.sql.Date"/>
+	<field name="orders_shipname" class="java.lang.String"/>
+	<field name="orders_shipaddress" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="40" splitType="Stretch">
+			<textField>
+				<reportElement x="2" y="2" width="286" height="38" forecolor="#009999" uuid="412b72d5-c411-4826-a7e4-ed8113404606"/>
+				<box>
+					<pen lineWidth="2.0" lineStyle="Solid" lineColor="#FF3333"/>
+					<topPen lineWidth="2.0" lineStyle="Solid" lineColor="#FF3333"/>
+					<leftPen lineWidth="2.0" lineStyle="Solid" lineColor="#FF3333"/>
+					<bottomPen lineWidth="2.0" lineStyle="Solid" lineColor="#FF3333"/>
+					<rightPen lineWidth="2.0" lineStyle="Solid" lineColor="#FF3333"/>
+				</box>
+				<textElement textAlignment="Center" rotation="None">
+					<font size="20"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Order Details"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="22" splitType="Stretch">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement mode="Opaque" x="393" y="0" width="100" height="20" forecolor="#FF6633" backcolor="#FFCCCC" uuid="69f1c6cc-c5ed-4eba-bcbc-adb6d19efa5a"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="19" width="555" height="1" uuid="5961504c-b1d3-4f20-84db-ea4cbb91915c"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="40" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="21" width="555" height="1" uuid="42128694-397f-43a0-b73b-473fc486a0ee"/>
+			</line>
+			<staticText>
+				<reportElement x="2" y="1" width="100" height="20" forecolor="#0033FF" uuid="c6fe3018-319a-495b-8293-16a582c55597"/>
+				<text><![CDATA[Order ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="116" y="1" width="100" height="20" forecolor="#0033FF" uuid="2e0ca46e-8815-4128-8787-10f45c21f446"/>
+				<text><![CDATA[Order Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="230" y="1" width="100" height="20" forecolor="#0033FF" uuid="b7536774-f836-4208-b50e-a5c9547a7f32"/>
+				<text><![CDATA[Shipment Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="1" width="100" height="20" forecolor="#0033FF" uuid="7a78c8ba-50db-48d7-980e-b446d855b673"/>
+				<text><![CDATA[Shipment Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="1" width="100" height="20" forecolor="#0033FF" uuid="055a989b-df81-49fc-b41c-c12730a61726"/>
+				<text><![CDATA[Shipment Address]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="40" splitType="Stretch">
+			<textField>
+				<reportElement x="2" y="10" width="100" height="20" forecolor="#FF6666" uuid="5b4c2415-25da-40dc-8d90-e88ca909138d"/>
+				<textFieldExpression><![CDATA[$F{orders_orderid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="116" y="10" width="100" height="20" forecolor="#FF6666" uuid="c0f8ac63-421c-424e-8332-32e17cb6ca86"/>
+				<textFieldExpression><![CDATA[$F{orders_orderdate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="10" width="100" height="20" forecolor="#FF6666" uuid="354f366d-ed35-4596-ad60-231e87cf9ff3"/>
+				<textFieldExpression><![CDATA[$F{orders_shippeddate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="344" y="10" width="100" height="20" forecolor="#FF6666" uuid="0785a0f9-1d65-499c-9e8c-e660bf9636a3"/>
+				<textFieldExpression><![CDATA[$F{orders_shipname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="10" width="100" height="20" forecolor="#FF6666" uuid="f4880ed2-90c7-467d-9e18-1a222427d17e"/>
+				<textFieldExpression><![CDATA[$F{orders_shipaddress}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="204" y="0" width="100" height="20" forecolor="#660066" uuid="4cbc66f7-b1a8-4977-9b3d-48dfb164fd94"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="100" splitType="Stretch"/>
+	</summary>
+</jasperReport>

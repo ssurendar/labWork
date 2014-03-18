@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="department_report" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" resourceBundle="dept-report" uuid="cadc9e31-c7a1-4f72-9dd6-e0d813f33fe9">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="343"/>
 	<property name="ireport.jasperserver.reportUnit" value="/reports/department_report"/>
 	<property name="ireport.jasperserver.url" value="http://localhost:8080/jasperserver/services/repository"/>
 	<template><![CDATA["D:\\TL\\Jaspersoft\\labWork.git\\trunk\\labWork\\TrainingStyle.jrtx"]]></template>
@@ -25,16 +25,12 @@ ORDER BY
 		</group>
 	</subDataset>
 	<scriptlet name="departmentScriptlet" class="com.jaspersoft.training.ireport.TrainingScriptlet"/>
-	<parameter name="department" class="java.lang.String">
-		<defaultValueExpression><![CDATA["HQ Marketing"]]></defaultValueExpression>
-	</parameter>
 	<queryString>
 		<![CDATA[SELECT
      department."department_id" AS department_id,
      department."department_description" AS department_department_description
 FROM
-     "public"."department" department
-WHERE department.department_description =$P{department}]]>
+     "public"."department" department]]>
 	</queryString>
 	<field name="department_id" class="java.lang.Integer"/>
 	<field name="department_department_description" class="java.lang.String"/>
@@ -78,11 +74,11 @@ WHERE department.department_description =$P{department}]]>
 	<title>
 		<band height="130" splitType="Stretch">
 			<textField>
-				<reportElement style="subtitle" x="127" y="11" width="347" height="26" uuid="42a4c869-1a27-4152-9eb0-4416a5637da5"/>
+				<reportElement style="subtitle" x="127" y="11" width="349" height="26" uuid="42a4c869-1a27-4152-9eb0-4416a5637da5"/>
 				<textElement textAlignment="Center">
 					<font size="20"/>
 				</textElement>
-				<textFieldExpression><![CDATA[msg( $R{title}, $P{department} )]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$R{title}]]></textFieldExpression>
 			</textField>
 			<image onErrorType="Icon">
 				<reportElement x="45" y="11" width="68" height="39" uuid="fa9765d8-8a4f-4b17-ad90-79f7e2dfc454"/>
@@ -119,14 +115,12 @@ WHERE department.department_description =$P{department}]]>
 	<detail>
 		<band height="100" splitType="Stretch">
 			<subreport>
-				<reportElement x="0" y="20" width="555" height="20" uuid="0166aff0-d0e9-4095-ac4b-72ed35e28ec8"/>
+				<reportElement x="0" y="20" width="555" height="10" uuid="04ebdc0d-90df-4fdc-bc3d-f3fe102cd49b"/>
 				<subreportParameter name="department_ID">
 					<subreportParameterExpression><![CDATA[$F{department_id}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<returnValue subreportVariable="totalSalary" toVariable="totalSalary"/>
-				<returnValue subreportVariable="totalEmployees" toVariable="totalEmployees"/>
-				<subreportExpression><![CDATA["D:\\TL\\Jaspersoft\\labWork.git\\trunk\\labWork\\employee_report.jrxml"]]></subreportExpression>
+				<subreportExpression><![CDATA["D:\\TL\\Jaspersoft\\labWork.git\\trunk\\labWork\\employee_report.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>
@@ -140,7 +134,7 @@ WHERE department.department_description =$P{department}]]>
 		<band height="170" splitType="Stretch">
 			<pieChart>
 				<chart>
-					<reportElement x="98" y="22" width="334" height="135" uuid="f398df9a-c164-4ed8-ae1a-38b363535b5d"/>
+					<reportElement x="113" y="17" width="334" height="135" uuid="f398df9a-c164-4ed8-ae1a-38b363535b5d"/>
 					<chartTitle>
 						<font size="12" isBold="true"/>
 						<titleExpression><![CDATA["Employees"]]></titleExpression>

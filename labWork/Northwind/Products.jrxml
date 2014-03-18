@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Products" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a40e0a3e-784e-4e5d-a7f1-fb42f0db6d1f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="category_Id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     products."ProductID" AS products_ProductID,
+     products."UnitPrice" AS products_UnitPrice,
+     products."QuantityPerUnit" AS products_QuantityPerUnit,
+     products."CategoryID" AS products_CategoryID
+FROM
+     "public"."products" products
+WHERE
+products."CategoryID"=$P{category_Id}]]>
+	</queryString>
+	<field name="products_productid" class="java.lang.Integer"/>
+	<field name="products_unitprice" class="java.lang.Float"/>
+	<field name="products_quantityperunit" class="java.lang.String"/>
+	<field name="products_categoryid" class="java.lang.Integer"/>
+	<background>
+		<band height="600">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="600" backcolor="#FFFDBA" uuid="7665fe12-c494-4f4f-97bf-5b4052a437cb"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</background>
+	<title>
+		<band height="40" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="287" height="40" forecolor="#009999" uuid="18af28bb-26f0-49bf-8974-67c4686e645e"/>
+				<box>
+					<pen lineWidth="2.0" lineColor="#FF3333"/>
+					<topPen lineWidth="2.0" lineColor="#FF3333"/>
+					<leftPen lineWidth="2.0" lineColor="#FF3333"/>
+					<bottomPen lineWidth="2.0" lineColor="#FF3333"/>
+					<rightPen lineWidth="2.0" lineColor="#FF3333"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="20"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Products Details"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="22" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement mode="Opaque" x="454" y="2" width="100" height="20" forecolor="#FF6633" backcolor="#FFCCCC" uuid="bd8fb679-744e-4278-afc4-c0f2228f8899"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="6a1f787c-0270-495d-b528-2700dd911b9d"/>
+			</line>
+			<staticText>
+				<reportElement x="364" y="2" width="100" height="20" uuid="42e76c6e-1405-4259-a463-4a1705afbda8"/>
+				<text><![CDATA[Inner Report]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" forecolor="#0033FF" uuid="d5dfc1c0-8bee-40da-8328-1103d1ecdb2c"/>
+				<text><![CDATA[Product ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="124" y="0" width="100" height="20" forecolor="#0033FF" uuid="d092a691-2abb-4aa7-a3d6-bf53f10dd9a6"/>
+				<text><![CDATA[Category ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="248" y="0" width="100" height="20" forecolor="#0033FF" uuid="f02bd135-cabb-4a8e-ac38-f6968587271a"/>
+				<text><![CDATA[Unit Price]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="372" y="0" width="124" height="20" forecolor="#0033FF" uuid="883110c6-de91-4c0c-94de-f454ad567f2d"/>
+				<text><![CDATA[Quantity per Unit]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="24" width="555" height="1" uuid="120e1b94-7851-4c9b-af1d-980740835ba0"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="40" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" forecolor="#FF0000" uuid="4ccdf0c1-ef20-4058-bfbe-1c3c6bea941e"/>
+				<textFieldExpression><![CDATA[$F{products_productid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="124" y="0" width="100" height="20" forecolor="#FF0000" uuid="98101035-358a-400c-8fcd-53b844b8003f"/>
+				<textFieldExpression><![CDATA[$F{products_categoryid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="248" y="0" width="100" height="20" forecolor="#FF0000" uuid="3f373a68-598f-4a1f-b4f8-f1d83ce26fd0"/>
+				<textFieldExpression><![CDATA[$F{products_unitprice}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="372" y="0" width="100" height="20" forecolor="#FF0000" uuid="49861fef-e319-4080-a919-990d70eb8ee1"/>
+				<textFieldExpression><![CDATA[$F{products_quantityperunit}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20"/>
+	</pageFooter>
+	<summary>
+		<band height="100" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -3,7 +3,7 @@
 	<property name="ireport.zoom" value="1.3310000000000008"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<template><![CDATA["D:\\TL\\Jaspersoft\\labWork\\TrainingStyle.jrtx"]]></template>
+	<template><![CDATA["D:\\TL\\Jaspersoft\\labWork.git\\trunk\\labWork\\TrainingStyle.jrtx"]]></template>
 	<style name="table">
 		<conditionalStyle>
 			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==1]]></conditionExpression>
@@ -101,7 +101,7 @@ WHERE employee.department_id=$P{department_ID}]]>
 	<detail>
 		<band height="30" splitType="Stretch">
 			<frame>
-				<reportElement style="table" mode="Opaque" x="14" y="0" width="555" height="30" uuid="7c21b117-fdca-44e7-849e-d96fa9b2578e"/>
+				<reportElement style="table" mode="Opaque" x="0" y="0" width="555" height="30" uuid="7c21b117-fdca-44e7-849e-d96fa9b2578e"/>
 				<textField>
 					<reportElement x="14" y="9" width="113" height="20" uuid="339686d0-3e31-4f2f-9050-46772eac5db2"/>
 					<textFieldExpression><![CDATA[$F{employee_full_name}]]></textFieldExpression>
