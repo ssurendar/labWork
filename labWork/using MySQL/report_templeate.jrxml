@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report_templeate" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b37c577d-2593-4f03-966e-c3ac4e433e00">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.callouts" value="##Thu Mar 20 19:33:45 IST 2014"/>
+	<background>
+		<band height="572" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="752" height="572" uuid="a398ed70-e5af-457f-92e3-f0d826330ee3"/>
+				<imageExpression><![CDATA["D:\\TL\\Jaspersoft\\JasperStudio Workspace\\Images\\bg1.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="309" y="32" width="443" height="47" backcolor="#3399FF" uuid="b503d527-0abd-40ed-abc6-8f12cd09e54f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="27" isItalic="true" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Student Report]]></text>
+			</staticText>
+			<frame>
+				<reportElement mode="Opaque" x="100" y="16" width="652" height="16" backcolor="#660066" uuid="f951be42-86a8-48d7-89c8-ef8c2d40e952"/>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="29" width="611" height="16" backcolor="#660066" uuid="083bdfab-12fc-42f8-8a39-9f80695b78e7"/>
+			</frame>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="752" height="25" forecolor="#FFFFFF" backcolor="#000066" uuid="e2f3e3ab-fae8-4ed8-b085-ba6815ed6d2f"/>
+				<textField>
+					<reportElement x="611" y="0" width="65" height="20" forecolor="#FFFFFF" uuid="aa8a745f-ccf1-477d-ba9c-62a54ab887e4"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Report">
+					<reportElement x="676" y="0" width="40" height="20" forecolor="#FFFFFF" uuid="71593569-38cb-442f-a9d2-94ed50ea3184"/>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField pattern="MMMMM dd, yyyy">
+					<reportElement x="0" y="0" width="100" height="20" forecolor="#FFFFFF" uuid="2719c020-eaef-41c9-953d-6c139c8d9f81"/>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+			<line>
+				<reportElement x="0" y="27" width="752" height="1" forecolor="#FFCCCC" uuid="411dd5cb-6487-4362-a29b-29aaf4a201e5"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

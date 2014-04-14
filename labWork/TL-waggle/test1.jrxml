@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="test1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a712c397-8e90-4db4-8576-053aeaaf87fa">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select distinct tp.ProfileId ,up.LastName,r.RoleName  from roles as r
+	join user_roles ur
+		on r.RoleId=ur.RoleId
+	join teacher_profiles tp
+		on ur.UserId=tp.ProfileId
+	join user_profiles up
+		on tp.ProfileId=up.ProfileId
+	join user_profiles_school ups
+		on  up.ProfileId = ups.ProfileId
+	join schools scls
+		on ups.SchoolId=scls.SchoolId
+	where r.RoleName='Teacher' or r.RoleName='School Admin' and tp.active='on';]]>
+	</queryString>
+	<field name="ProfileId" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="LastName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="RoleName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="9" width="555" height="20" forecolor="#990000" uuid="be635394-2b54-44f1-8c21-89e3f563a094"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[get all the users whole belong to a Role Teacher for a given schoolId]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="50">
+			<staticText>
+				<reportElement x="29" y="0" width="100" height="20" forecolor="#990000" uuid="c39e70f4-662b-4f73-a085-4723d33a9bd7"/>
+				<text><![CDATA[ProfileId]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="191" y="0" width="100" height="20" forecolor="#990000" uuid="832da3f5-80bf-4945-ab72-424d2fa148ae"/>
+				<text><![CDATA[LastName]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="0" width="100" height="20" forecolor="#990000" uuid="46831f1d-fcc7-4ceb-adf9-d27adf79f497"/>
+				<text><![CDATA[RoleName]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="50">
+			<textField>
+				<reportElement x="29" y="0" width="100" height="20" forecolor="#3366FF" uuid="00e2b983-219f-478f-8dc4-341bcb3e15c3"/>
+				<textFieldExpression><![CDATA[$F{ProfileId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="191" y="0" width="100" height="20" forecolor="#3366FF" uuid="88cc5d55-3f5c-4613-91cf-c019074ec1d7"/>
+				<textFieldExpression><![CDATA[$F{LastName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="354" y="0" width="100" height="20" forecolor="#3366FF" uuid="4c02a50f-0c7d-49c1-a48c-0b07dd16a1a4"/>
+				<textFieldExpression><![CDATA[$F{RoleName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

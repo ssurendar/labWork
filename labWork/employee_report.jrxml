@@ -3,7 +3,9 @@
 	<property name="ireport.zoom" value="1.3310000000000008"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<template><![CDATA["D:\\TL\\Jaspersoft\\labWork.git\\trunk\\labWork\\TrainingStyle.jrtx"]]></template>
+	<property name="ireport.jasperserver.reportUnit" value="/test1/emp"/>
+	<property name="ireport.jasperserver.url" value="http://localhost:8080/jasperserver/services/repository"/>
+	<template><![CDATA["D:\\TL\\Jaspersoft\\JasperStudio Workspace\\labWork\\TrainingStyle.jrtx"]]></template>
 	<style name="table">
 		<conditionalStyle>
 			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2==1]]></conditionExpression>

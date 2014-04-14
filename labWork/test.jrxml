@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="test" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6dbd7745-530a-4bd3-8a40-e90adad497b2">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     store."store_id" AS store_store_id,
+     store."store_name" AS store_store_name,
+     store."store_city" AS store_store_city,
+     store."store_country" AS store_store_country
+FROM
+     "public"."store" store]]>
+	</queryString>
+	<field name="store_store_id" class="java.lang.Integer"/>
+	<field name="store_store_name" class="java.lang.String"/>
+	<field name="store_store_city" class="java.lang.String"/>
+	<field name="store_store_country" class="java.lang.String"/>
+	<background>
+		<band height="600" splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" forecolor="#990099" uuid="2f6be72b-2571-4e1d-8c9d-a302d9b7fbaa"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Store ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="134" y="2" width="100" height="20" forecolor="#990099" uuid="fe72ff7c-82a8-46db-930b-7557340e083f"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Store Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="2" width="100" height="20" forecolor="#990099" uuid="fe366352-f715-4232-8875-14107e68cdef"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Store City]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="403" y="2" width="100" height="20" forecolor="#990099" uuid="fb7ce750-0400-4dfb-a2cb-d4c7d072d63e"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Store Country]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="30" width="555" height="1" uuid="0de420da-ebed-4d87-bb5d-c7a9a1fb9558"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="dd040d7e-ea47-40fc-9dd1-993b7fff2b4d"/>
+				<textFieldExpression><![CDATA[$F{store_store_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="122" y="0" width="100" height="20" uuid="28b13314-510a-497d-b4f2-f62ced22ed17"/>
+				<textFieldExpression><![CDATA[$F{store_store_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="259" y="0" width="100" height="20" uuid="4c1222bf-1f0b-41ff-9022-9b8dc30fed10"/>
+				<textFieldExpression><![CDATA[$F{store_store_city}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="403" y="0" width="100" height="20" uuid="d56ac6c1-bfe8-4717-bd1a-fe2049c027b2"/>
+				<textFieldExpression><![CDATA[$F{store_store_country}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="403" y="0" width="80" height="20" uuid="da5d52fb-4b35-406c-9140-79f8725fc4f7"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="503" y="0" width="40" height="20" uuid="a0ed69d2-3cb6-4d35-b4fd-337d01f14501"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
